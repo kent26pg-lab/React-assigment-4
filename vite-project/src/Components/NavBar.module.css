@@ -1,35 +1,65 @@
 .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 16px 30px;
+  width: 100%;
 
   background: #f8f1e5;
+
   border-bottom: 1px solid #d6c7ad;
 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+/* ========================================
+   HOVEDNAVIGASJON
+======================================== */
+
+.mainNav {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 70px;
+
+  padding: 16px 30px;
+}
+
+/* ========================================
+   LOGO
+======================================== */
+
 .logo {
   color: #4f3926;
 
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
 
   text-decoration: none;
 }
 
+/* ========================================
+   HOME / BOOKS / FAVORITES
+======================================== */
+
 .links {
+  position: absolute;
+  left: 50%;
+
+  transform: translateX(-50%);
+
   display: flex;
-  gap: 20px;
+  align-items: center;
+
+  gap: 30px;
 }
 
 .link {
   color: #4f3926;
 
-  text-decoration: none;
+  font-size: 1.05rem;
   font-weight: 600;
+
+  text-decoration: none;
 
   transition: color 0.2s ease;
 }
@@ -38,15 +68,91 @@
   color: #8a6345;
 }
 
+/* ========================================
+   CATEGORY RAD
+======================================== */
+
+.categoryBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 8px 30px;
+
+  border-top: 1px solid #e3d7c3;
+}
+
+/* ========================================
+   CATEGORY KNAPP
+======================================== */
+
+.categoryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 8px 18px;
+
+  border: 1px solid #cdbb9e;
+  border-radius: 7px;
+
+  color: #4f3926;
+  background: #eee4d3;
+
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.categoryButton:hover {
+  background: #e8dcc8;
+
+  border-color: #bca98c;
+}
+
+.arrow {
+  font-size: 0.8rem;
+}
+
+/* ========================================
+   MOBIL
+======================================== */
+
 @media (max-width: 600px) {
-  .navbar {
+  .mainNav {
     flex-direction: column;
+
     gap: 15px;
+
+    min-height: auto;
+  }
+
+  .logo {
+    font-size: 1.6rem;
   }
 
   .links {
-    gap: 12px;
+    position: static;
+
+    transform: none;
+
     flex-wrap: wrap;
     justify-content: center;
+
+    gap: 15px;
+  }
+
+  .categoryBar {
+    padding: 8px 15px;
   }
 }
