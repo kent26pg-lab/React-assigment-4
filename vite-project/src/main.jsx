@@ -5,6 +5,7 @@ import { createRoot } from "react-dom/client";
 import Books from "./Pages/Books.jsx";
 import Favorites from "./Pages/Favorites.jsx";
 import Home from "./Pages/Home.jsx";
+import BookDetails from "./Pages/BookDetails.jsx";
 import App from "./App.jsx";
 
 import "./index.css";
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "favorites",
         element: <Favorites />,
+      },
+      {
+        path: "books/:id",
+        element: <BookDetails />,
       },
     ],
   },
