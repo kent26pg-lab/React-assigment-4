@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <nav className={styles.navbar}>
       <Link className={styles.logo} to="/">
-        Bookstore
+        Gutendex
       </Link>
 
       <div className={styles.links}>
