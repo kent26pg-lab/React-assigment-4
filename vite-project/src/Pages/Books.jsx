@@ -1,1 +1,10 @@
-<h1>Hei dette er bøker</h1>
+function Books() {
+  return (
+    <div>
+      <h1>Books</h1>
+      <p>Her kommer bøkene.</p>
+    </div>
+  );
+}
+
+export default Books;
