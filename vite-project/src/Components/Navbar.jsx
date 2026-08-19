@@ -1,11 +1,27 @@
 import { Link } from "react-router-dom";
 
+import styles from "./Navbar.module.css";
+
 function Navbar() {
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/books">Books</Link>
-      <Link to="/favorites">Favorites</Link>
+    <nav className={styles.navbar}>
+      <Link className={styles.logo} to="/">
+        Bookstore
+      </Link>
+
+      <div className={styles.links}>
+        <Link className={styles.link} to="/">
+          Home
+        </Link>
+
+        <Link className={styles.link} to="/books">
+          Books
+        </Link>
+
+        <Link className={styles.link} to="/favorites">
+          Favorites
+        </Link>
+      </div>
     </nav>
   );
 }

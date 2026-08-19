@@ -1,9 +1,14 @@
+import styles from "./Home.module.css";
+
 function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-      <p>Velkommen til Gutendex!</p>
-    </div>
+    <main className={styles.container}>
+      <h1 className={styles.title}>Welcome to the Bookstore</h1>
+
+      <p className={styles.text}>
+        Her kan du utforske bøker fra Gutendex.
+      </p>
+    </main>
   );
 }
 

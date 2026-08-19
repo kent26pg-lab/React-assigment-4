@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import BookCard from "../Components/Bookcards";
+
+import BookCard from "../Components/BookCard.jsx";
+import styles from "./Books.module.css";
 
 function Books() {
   const [books, setBooks] = useState([]);
@@ -16,8 +18,6 @@ function Books() {
 
         const data = await response.json();
 
-        console.log(data);
-
         setBooks(data.results);
       } catch (error) {
         console.error("Fetch error:", error);
@@ -30,17 +30,19 @@ function Books() {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p className={styles.loading}>Loading...</p>;
   }
 
   return (
-    <div>
-      <h1>Books</h1>
+    <main className={styles.container}>
+      <h1 className={styles.title}>Books</h1>
 
-      {books.map((book) => (
-        <BookCard key={book.id} book={book} />
-      ))}
-    </div>
+      <div className={styles.books}>
+        {books.map((book) => (
+          <BookCard key={book.id} book={book} />
+        ))}
+      </div>
+    </main>
   );
 }
 

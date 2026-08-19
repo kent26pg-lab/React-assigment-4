@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import styles from "./BookDetails.module.css";
+
 function BookDetails() {
   const { id } = useParams();
 
@@ -34,30 +36,33 @@ function BookDetails() {
   }, [id]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p className={styles.loading}>Loading...</p>;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p className={styles.error}>{error}</p>;
   }
 
   if (!book) {
-    return <p>Fant ikke boken.</p>;
+    return <p className={styles.error}>Fant ikke boken.</p>;
   }
 
   const cover = book.formats["image/jpeg"];
 
-  const author = book.authors.length > 0
-    ? book.authors[0].name
-    : "Ukjent forfatter";
+  const author =
+    book.authors.length > 0
+      ? book.authors[0].name
+      : "Ukjent forfatter";
 
-  const categories = book.subjects.length > 0
-    ? book.subjects.join(", ")
-    : "Ingen kategori";
+  const categories =
+    book.subjects.length > 0
+      ? book.subjects.join(", ")
+      : "Ingen kategori";
 
-  const languages = book.languages.length > 0
-    ? book.languages.join(", ")
-    : "Ukjent språk";
+  const languages =
+    book.languages.length > 0
+      ? book.languages.join(", ")
+      : "Ukjent språk";
 
   const bookLink =
     book.formats["text/html"] ||
@@ -65,42 +70,48 @@ function BookDetails() {
     book.formats["text/plain"];
 
   return (
-    <div>
-      <h1>{book.title}</h1>
+    <main className={styles.container}>
+      <div className={styles.card}>
+        {cover && (
+          <img
+            className={styles.cover}
+            src={cover}
+            alt={`Cover av ${book.title}`}
+          />
+        )}
 
-      {cover && (
-        <img
-          src={cover}
-          alt={`Cover av ${book.title}`}
-        />
-      )}
+        <div className={styles.info}>
+          <h1 className={styles.title}>{book.title}</h1>
 
-      <p>
-        <strong>Forfatter:</strong> {author}
-      </p>
+          <p>
+            <strong>Forfatter:</strong> {author}
+          </p>
 
-      <p>
-        <strong>Nedlastninger:</strong> {book.download_count}
-      </p>
+          <p>
+            <strong>Nedlastninger:</strong> {book.download_count}
+          </p>
 
-      <p>
-        <strong>Kategori:</strong> {categories}
-      </p>
+          <p>
+            <strong>Kategori:</strong> {categories}
+          </p>
 
-      <p>
-        <strong>Språk:</strong> {languages}
-      </p>
+          <p>
+            <strong>Språk:</strong> {languages}
+          </p>
 
-      {bookLink && (
-        <a
-          href={bookLink}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Les boka digitalt
-        </a>
-      )}
-    </div>
+          {bookLink && (
+            <a
+              className={styles.link}
+              href={bookLink}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Les boka digitalt
+            </a>
+          )}
+        </div>
+      </div>
+    </main>
   );
 }
 
