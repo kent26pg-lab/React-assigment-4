@@ -1,0 +1,1 @@
+<h1>Hei dette er favoritter</h1>
