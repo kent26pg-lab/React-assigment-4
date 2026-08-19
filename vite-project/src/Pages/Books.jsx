@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import BookCard from "../Components/Bookcards";
 
 function Books() {
   const [books, setBooks] = useState([]);
@@ -37,7 +38,7 @@ function Books() {
       <h1>Books</h1>
 
       {books.map((book) => (
-        <p key={book.id}>{book.title}</p>
+        <BookCard key={book.id} book={book} />
       ))}
     </div>
   );
