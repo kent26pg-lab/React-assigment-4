@@ -5,29 +5,33 @@ import { createRoot } from "react-dom/client";
 import Books from "./Pages/Books.jsx";
 import Favorites from "./Pages/Favorites.jsx";
 import Home from "./Pages/Home.jsx";
-
-import Navbar from "./Components/Navbar.jsx";
+import App from "./App.jsx";
 
 import "./index.css";
-import App from "./App.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/books",
-    element: <Books />,
-  },
-  {
-    path: "/favorites",
-    element: <Favorites />,
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "books",
+        element: <Books />,
+      },
+      {
+        path: "favorites",
+        element: <Favorites />,
+      },
+    ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
 );
