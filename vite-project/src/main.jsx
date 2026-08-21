@@ -6,6 +6,7 @@ import Books from "./Pages/Books.jsx";
 import Favorites from "./Pages/Favorites.jsx";
 import Home from "./Pages/Home.jsx";
 import BookDetails from "./Pages/BookDetails.jsx";
+import CategoryBooks from "./Pages/CategoryBooks.jsx";
 import App from "./App.jsx";
 
 import "./index.css";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "books/:id",
         element: <BookDetails />,
+      },
+      {
+        path: "categories/:category",
+        element: <CategoryBooks />,
       },
     ],
   },
