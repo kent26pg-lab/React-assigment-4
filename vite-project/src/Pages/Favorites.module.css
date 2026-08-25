@@ -1,0 +1,178 @@
+.container {
+  max-width: 1000px;
+
+  margin: 40px auto;
+
+  padding: 30px;
+}
+
+.title {
+  margin-bottom: 30px;
+
+  color: #4f3926;
+
+  text-align: center;
+}
+
+.empty {
+  text-align: center;
+
+  margin-top: 40px;
+
+  color: #6b4f35;
+}
+
+/* ========================================
+   BØKER
+======================================== */
+
+.books {
+  display: grid;
+
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(180px, 1fr)
+  );
+
+  gap: 20px;
+}
+
+.book {
+  padding: 15px;
+
+  background: #f8f1e5;
+
+  border: 1px solid #d6c7ad;
+
+  border-radius: 8px;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.book:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   BOK-LENKE
+======================================== */
+
+.bookLink {
+  display: block;
+
+  color: #302217;
+
+  text-decoration: none;
+}
+
+/* ========================================
+   COVER
+======================================== */
+
+.cover {
+  display: block;
+
+  width: 100%;
+
+  height: 250px;
+
+  object-fit: cover;
+
+  margin-bottom: 12px;
+
+  border-radius: 6px;
+}
+
+.noCover {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  height: 250px;
+
+  margin-bottom: 12px;
+
+  color: #6b4f35;
+
+  background: #e8dcc8;
+
+  border-radius: 6px;
+}
+
+/* ========================================
+   BOKTITTEL
+======================================== */
+
+.bookTitle {
+  margin-bottom: 12px;
+
+  color: #4f3926;
+
+  font-size: 1rem;
+
+  line-height: 1.4;
+}
+
+/* ========================================
+   FJERN-KNAPP
+======================================== */
+
+.removeButton {
+  width: 100%;
+
+  margin-top: 5px;
+
+  padding: 9px 12px;
+
+  color: white;
+
+  background: #6b4f35;
+
+  border: none;
+
+  border-radius: 6px;
+
+  font: inherit;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.removeButton:hover {
+  background: #4f3926;
+}
+
+/* ========================================
+   MOBIL
+======================================== */
+
+@media (max-width: 600px) {
+  .container {
+    margin: 20px auto;
+
+    padding: 20px;
+  }
+
+  .books {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+  }
+
+  .cover,
+  .noCover {
+    height: 220px;
+  }
+}
