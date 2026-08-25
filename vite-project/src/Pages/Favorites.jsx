@@ -16,41 +16,31 @@ function Favorites() {
         </p>
       ) : (
         <div className={styles.books}>
-          {favorites.map((book) => {
-            const cover = book.formats["image/jpeg"];
+          {favorites.map((book) => (
+            <article key={book.id} className={styles.card}>
+              <Link
+                to={`/books/${book.id}`}
+                className={styles.link}
+              >
+                <img
+                  src={book.formats?.["image/jpeg"]}
+                  alt={book.title}
+                  className={styles.cover}
+                />
 
-            return (
-              <div key={book.id} className={styles.book}>
-                <Link
-                  to={`/books/${book.id}`}
-                  className={styles.bookLink}
-                >
-                  {cover ? (
-                    <img
-                      src={cover}
-                      alt={book.title}
-                      className={styles.cover}
-                    />
-                  ) : (
-                    <div className={styles.noCover}>
-                      No cover
-                    </div>
-                  )}
+                <h2 className={styles.bookTitle}>
+                  {book.title}
+                </h2>
+              </Link>
 
-                  <h2 className={styles.bookTitle}>
-                    {book.title}
-                  </h2>
-                </Link>
-
-                <button
-                  className={styles.removeButton}
-                  onClick={() => removeFavorite(book.id)}
-                >
-                  Fjern fra Favoritter
-                </button>
-              </div>
-            );
-          })}
+              <button
+                className={styles.removeButton}
+                onClick={() => removeFavorite(book.id)}
+              >
+                Fjern
+              </button>
+            </article>
+          ))}
         </div>
       )}
     </main>

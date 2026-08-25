@@ -6,24 +6,22 @@
   padding: 30px;
 }
 
+/* ========================================
+   TITLE
+======================================== */
+
 .title {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 
-  color: #4f3926;
+  color: #302217;
 
-  text-align: center;
-}
+  font-size: 2rem;
 
-.empty {
-  text-align: center;
-
-  margin-top: 40px;
-
-  color: #6b4f35;
+  letter-spacing: -0.3px;
 }
 
 /* ========================================
-   BØKER
+   BOOKS GRID
 ======================================== */
 
 .books {
@@ -37,38 +35,49 @@
   gap: 20px;
 }
 
-.book {
-  padding: 15px;
-
-  background: #f8f1e5;
-
-  border: 1px solid #d6c7ad;
-
-  border-radius: 8px;
-
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.book:hover {
-  transform: translateY(-4px);
-
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
 /* ========================================
-   BOK-LENKE
+   BOOK CARD
 ======================================== */
 
-.bookLink {
-  display: block;
+.card {
+  height: 100%;
 
-  color: #302217;
+  display: flex;
 
-  text-decoration: none;
+  flex-direction: column;
+
+  padding: 15px;
+
+  background: rgba(255, 255, 255, 0.3);
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  box-shadow:
+    0 10px 25px rgba(80, 60, 40, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+
+  backdrop-filter: blur(15px);
+
+  -webkit-backdrop-filter: blur(15px);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+
+  background: rgba(255, 255, 255, 0.45);
+
+  box-shadow:
+    0 16px 35px rgba(80, 60, 40, 0.13),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 
 /* ========================================
@@ -76,103 +85,137 @@
 ======================================== */
 
 .cover {
-  display: block;
-
   width: 100%;
 
   height: 250px;
 
   object-fit: cover;
 
-  margin-bottom: 12px;
+  border-radius: 14px;
 
-  border-radius: 6px;
-}
-
-.noCover {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-
-  height: 250px;
-
-  margin-bottom: 12px;
-
-  color: #6b4f35;
-
-  background: #e8dcc8;
-
-  border-radius: 6px;
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.12);
 }
 
 /* ========================================
-   BOKTITTEL
+   LINK
+======================================== */
+
+.link {
+  display: block;
+
+  color: inherit;
+
+  text-decoration: none;
+}
+
+/* ========================================
+   BOOK TITLE
 ======================================== */
 
 .bookTitle {
-  margin-bottom: 12px;
+  height: 42px;
 
-  color: #4f3926;
+  margin-top: 14px;
+
+  color: #302217;
 
   font-size: 1rem;
 
-  line-height: 1.4;
+  line-height: 1.3;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 2;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
 }
 
 /* ========================================
-   FJERN-KNAPP
+   REMOVE BUTTON
 ======================================== */
 
 .removeButton {
-  width: 100%;
+  margin-top: 14px;
 
-  margin-top: 5px;
+  padding: 9px 16px;
 
-  padding: 9px 12px;
+  color: #6b4f35;
 
-  color: white;
+  background: rgba(255, 255, 255, 0.32);
 
-  background: #6b4f35;
+  border: 1px solid rgba(255, 255, 255, 0.6);
 
-  border: none;
-
-  border-radius: 6px;
+  border-radius: 999px;
 
   font: inherit;
+
+  font-size: 0.9rem;
 
   font-weight: 600;
 
   cursor: pointer;
 
-  transition: background-color 0.2s ease;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .removeButton:hover {
-  background: #4f3926;
+  color: white;
+
+  background: rgba(107, 79, 53, 0.85);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 15px rgba(80, 60, 40, 0.12);
 }
 
 /* ========================================
-   MOBIL
+   EMPTY
+======================================== */
+
+.empty {
+  margin-top: 30px;
+
+  color: #6b4f35;
+
+  text-align: center;
+}
+
+/* ========================================
+   MOBILE
 ======================================== */
 
 @media (max-width: 600px) {
   .container {
-    margin: 20px auto;
+    margin: 25px auto;
 
-    padding: 20px;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.7rem;
   }
 
   .books {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(150px, 1fr)
+    );
 
     gap: 15px;
   }
 
-  .cover,
-  .noCover {
+  .cover {
     height: 220px;
   }
 }
