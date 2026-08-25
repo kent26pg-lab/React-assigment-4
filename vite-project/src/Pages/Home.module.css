@@ -1,13 +1,223 @@
-.container {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 30px;
+/* =========================================
+   HOME
+========================================= */
+
+.home {
+  min-height: calc(100vh - 80px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 50px 20px;
 }
 
-.title {
-  margin-bottom: 15px;
+
+/* =========================================
+   BOOK COVER
+========================================= */
+
+.cover {
+  width: min(700px, 100%);
+
+  min-height: 600px;
+
+  padding: 70px 60px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(70, 42, 24, 0.12),
+      transparent 8%,
+      transparent 92%,
+      rgba(70, 42, 24, 0.12)
+    ),
+    #f3e4c8;
+
+  border: 1px solid #c8ad86;
+
+  box-shadow:
+    0 8px 20px rgba(48, 34, 23, 0.18),
+    inset 0 0 40px rgba(90, 60, 35, 0.08);
+
+  position: relative;
 }
 
-.text {
+
+/* =========================================
+   DECORATIVE LINES
+========================================= */
+
+.decorativeLine {
+  width: 70%;
+
+  height: 1px;
+
+  background: #8c6a45;
+
+  position: relative;
+
+  margin: 25px 0;
+}
+
+.decorativeLine::before,
+.decorativeLine::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  background: #8c6a45;
+
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.decorativeLine::before {
+  left: -4px;
+}
+
+.decorativeLine::after {
+  right: -4px;
+}
+
+
+/* =========================================
+   SMALL TITLE
+========================================= */
+
+.smallText {
+  margin-bottom: 25px;
+
+  font-size: 0.85rem;
+
+  letter-spacing: 0.35em;
+
+  color: #7a5a3a;
+
+  font-weight: bold;
+}
+
+
+/* =========================================
+   MAIN TITLE
+========================================= */
+
+h1 {
+  margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+
+  line-height: 1.05;
+
+  font-weight: normal;
+
+  color: #302217;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.description {
+  max-width: 500px;
+
+  margin: 30px 0;
+
   font-size: 1.1rem;
+
+  line-height: 1.7;
+
+  color: #5b4632;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.button {
+  display: inline-block;
+
+  padding: 13px 28px;
+
+  border: 1px solid #6b4f35;
+
+  background: #6b4f35;
+
+  color: #f8efdf;
+
+  text-decoration: none;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 1rem;
+
+  letter-spacing: 0.05em;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.button:hover {
+  background: #4f3926;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 5px 10px rgba(48, 34, 23, 0.2);
+}
+
+
+/* =========================================
+   FOOTER TEXT
+========================================= */
+
+.footerText {
+  margin-top: 5px;
+
+  font-size: 0.7rem;
+
+  letter-spacing: 0.3em;
+
+  color: #8c6a45;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .home {
+    padding: 30px 15px;
+  }
+
+  .cover {
+    min-height: 520px;
+
+    padding: 50px 25px;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .decorativeLine {
+    width: 85%;
+  }
 }
