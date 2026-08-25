@@ -1,52 +1,79 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-import CategoryMenu from "./CategoryMenu.jsx";
-import styles from "./Navbar.module.css";
+import styles from "./NavBar.module.css";
 
 function Navbar() {
-  const [showCategories, setShowCategories] = useState(false);
+  const location = useLocation();
 
-  function toggleCategories() {
-    setShowCategories((current) => !current);
-  }
+  const showCategories = location.pathname === "/books";
+
+  const categories = [
+    "Fiction",
+    "Mystery",
+    "Thriller",
+    "Romance",
+    "Fantasy",
+    "Morality",
+    "Society",
+    "Power",
+    "Justice",
+    "Adventure",
+    "Tragedy",
+    "War",
+    "Philosophy",
+  ];
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.mainNav}>
-        <Link className={styles.logo} to="/">
-          Gutendex project
-        </Link>
-
+    <header className={styles.navbar}>
+      <nav className={styles.nav}>
         <div className={styles.links}>
-          <Link className={styles.link} to="/">
+          <Link
+            to="/"
+            className={`${styles.link} ${
+              location.pathname === "/" ? styles.active : ""
+            }`}
+          >
             Home
           </Link>
 
-          <Link className={styles.link} to="/books">
+          <Link
+            to="/books"
+            className={`${styles.link} ${
+              location.pathname === "/books" ? styles.active : ""
+            }`}
+          >
             Books
           </Link>
 
-          <Link className={styles.link} to="/favorites">
+          <Link
+            to="/favorites"
+            className={`${styles.link} ${
+              location.pathname === "/favorites" ? styles.active : ""
+            }`}
+          >
             Favorites
           </Link>
         </div>
-      </div>
 
-      <div className={styles.categoryBar}>
-        <button
-          className={styles.categoryButton}
-          onClick={toggleCategories}
-        >
-          Categories
-          <span className={styles.arrow}>
-            {showCategories ? "▴" : "▾"}
-          </span>
-        </button>
-      </div>
+        {showCategories && (
+          <div className={styles.categorySection}>
+            <h2 className={styles.categoryTitle}>Categories</h2>
 
-      {showCategories && <CategoryMenu />}
-    </nav>
+            <div className={styles.categories}>
+              {categories.map((category) => (
+                <Link
+                  key={category}
+                  to={`/categories/${category}`}
+                  className={styles.category}
+                >
+                  {category}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
+    </header>
   );
 }
 
