@@ -7,8 +7,15 @@ function CategoryBooks() {
   const { category } = useParams();
 
   const [books, setBooks] = useState([]);
+  const [nextPage, setNextPage] = useState(null);
+  const [previousPage, setPreviousPage] = useState(null);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [pageUrl, setPageUrl] = useState(
+    `https://gutendex.com/books?topic=${category}`
+  );
 
   useEffect(() => {
     async function fetchBooks() {
@@ -16,9 +23,7 @@ function CategoryBooks() {
         setLoading(true);
         setError("");
 
-        const response = await fetch(
-          `https://gutendex.com/books?topic=${category}`
-        );
+        const response = await fetch(pageUrl);
 
         if (!response.ok) {
           throw new Error("Kunne ikke hente bøker.");
@@ -27,6 +32,8 @@ function CategoryBooks() {
         const data = await response.json();
 
         setBooks(data.results);
+        setNextPage(data.next);
+        setPreviousPage(data.previous);
       } catch (error) {
         console.error(error);
         setError("Noe gikk galt. Klarte ikke å hente bøkene.");
@@ -36,7 +43,23 @@ function CategoryBooks() {
     }
 
     fetchBooks();
+  }, [pageUrl]);
+
+  useEffect(() => {
+    setPageUrl(`https://gutendex.com/books?topic=${category}`);
   }, [category]);
+
+  function handleNextPage() {
+    if (nextPage) {
+      setPageUrl(nextPage);
+    }
+  }
+
+  function handlePreviousPage() {
+    if (previousPage) {
+      setPageUrl(previousPage);
+    }
+  }
 
   if (loading) {
     return (
@@ -63,35 +86,57 @@ function CategoryBooks() {
           Ingen bøker funnet i denne kategorien.
         </p>
       ) : (
-        <div className={styles.books}>
-          {books.map((book) => (
-            <Link
-              key={book.id}
-              to={`/books/${book.id}`}
-              className={styles.book}
+        <>
+          <div className={styles.books}>
+            {books.map((book) => (
+              <Link
+                key={book.id}
+                to={`/books/${book.id}`}
+                className={styles.book}
+              >
+                {book.formats["image/jpeg"] ? (
+                  <img
+                    src={book.formats["image/jpeg"]}
+                    alt={book.title}
+                    className={styles.cover}
+                  />
+                ) : (
+                  <div className={styles.noCover}>
+                    No cover
+                  </div>
+                )}
+
+                <h2 className={styles.bookTitle}>
+                  {book.title}
+                </h2>
+
+                <p className={styles.author}>
+                  {book.authors.length > 0
+                    ? book.authors[0].name
+                    : "Ukjent forfatter"}
+                </p>
+              </Link>
+            ))}
+          </div>
+
+          <div className={styles.pagination}>
+            <button
+              className={styles.paginationButton}
+              onClick={handlePreviousPage}
+              disabled={!previousPage}
             >
-              {book.formats["image/jpeg"] ? (
-                <img
-                  src={book.formats["image/jpeg"]}
-                  alt={book.title}
-                  className={styles.cover}
-                />
-              ) : (
-                <div className={styles.noCover}>
-                  No cover
-                </div>
-              )}
+              ← Previous
+            </button>
 
-              <h2 className={styles.bookTitle}>{book.title}</h2>
-
-              <p className={styles.author}>
-                {book.authors.length > 0
-                  ? book.authors[0].name
-                  : "Ukjent forfatter"}
-              </p>
-            </Link>
-          ))}
-        </div>
+            <button
+              className={styles.paginationButton}
+              onClick={handleNextPage}
+              disabled={!nextPage}
+            >
+              Next →
+            </button>
+          </div>
+        </>
       )}
     </main>
   );
