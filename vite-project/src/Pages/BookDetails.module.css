@@ -47,6 +47,48 @@
 }
 
 /* ========================================
+   KATEGORIER
+======================================== */
+
+.categoryInfo {
+  margin-bottom: 10px;
+}
+
+.categories {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 10px;
+}
+
+.category {
+  padding: 6px 12px;
+
+  color: #4f3926;
+
+  background: #eee3d1;
+
+  border: 1px solid #d6c7ad;
+
+  border-radius: 20px;
+
+  font-size: 0.9rem;
+
+  font-weight: 600;
+}
+
+.noCategory {
+  margin-left: 5px;
+
+  color: #6b4f35;
+
+  font-weight: normal;
+}
+
+/* ========================================
    KNAPPER
 ======================================== */
 
@@ -74,6 +116,8 @@
   text-decoration: none;
 
   border-radius: 6px;
+
+  font-weight: 600;
 }
 
 .link:hover {
@@ -149,5 +193,15 @@
 
   .title {
     font-size: 1.6rem;
+  }
+
+  .categories {
+    gap: 6px;
+  }
+
+  .category {
+    padding: 5px 10px;
+
+    font-size: 0.8rem;
   }
 }

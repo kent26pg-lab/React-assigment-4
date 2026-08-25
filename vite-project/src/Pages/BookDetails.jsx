@@ -14,6 +14,52 @@ function BookDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const categories = [
+    "Fiction",
+    "Mystery",
+    "Thriller",
+    "Romance",
+    "Fantasy",
+    "Morality",
+    "Society",
+    "Power",
+    "Justice",
+    "Adventure",
+    "Tragedy",
+    "War",
+    "Philosophy",
+  ];
+
+  function getLanguageName(languageCode) {
+    const languages = {
+      en: "Engelsk",
+      no: "Norsk",
+      nb: "Norsk bokmål",
+      nn: "Norsk nynorsk",
+      da: "Dansk",
+      sv: "Svensk",
+      de: "Tysk",
+      fr: "Fransk",
+      es: "Spansk",
+      it: "Italiensk",
+      pt: "Portugisisk",
+      nl: "Nederlandsk",
+      fi: "Finsk",
+      is: "Islandsk",
+      pl: "Polsk",
+      ru: "Russisk",
+      uk: "Ukrainsk",
+      el: "Gresk",
+      la: "Latin",
+      ja: "Japansk",
+      zh: "Kinesisk",
+      ar: "Arabisk",
+      he: "Hebraisk",
+    };
+
+    return languages[languageCode] || languageCode;
+  }
+
   useEffect(() => {
     async function fetchBook() {
       try {
@@ -79,6 +125,12 @@ function BookDetails() {
     book.formats["application/epub+zip"] ||
     book.formats["application/pdf"];
 
+  const bookCategories = categories.filter((category) =>
+    book.subjects.some((subject) =>
+      subject.toLowerCase().includes(category.toLowerCase())
+    )
+  );
+
   return (
     <main className={styles.container}>
       <div className={styles.card}>
@@ -105,17 +157,35 @@ function BookDetails() {
             {book.download_count}
           </p>
 
-          <p>
-            <strong>Kategori:</strong>{" "}
-            {book.subjects.length > 0
-              ? book.subjects.join(", ")
-              : "Ingen kategori"}
-          </p>
+          <div className={styles.categoryInfo}>
+            <strong>Kategori:</strong>
+
+            <div className={styles.categories}>
+              {bookCategories.length > 0 ? (
+                bookCategories.map((category) => (
+                  <span
+                    key={category}
+                    className={styles.category}
+                  >
+                    {category}
+                  </span>
+                ))
+              ) : (
+                <span className={styles.noCategory}>
+                  Ingen kategori
+                </span>
+              )}
+            </div>
+          </div>
 
           <p>
             <strong>Språk:</strong>{" "}
             {book.languages.length > 0
-              ? book.languages.join(", ")
+              ? book.languages
+                  .map((language) =>
+                    getLanguageName(language)
+                  )
+                  .join(", ")
               : "Ukjent"}
           </p>
 
