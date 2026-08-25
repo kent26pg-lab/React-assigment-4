@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useFavorites } from "../Context/FavoriteContext.jsx";
 
@@ -7,6 +7,8 @@ import styles from "./BookDetails.module.css";
 
 function BookDetails() {
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
@@ -133,6 +135,13 @@ function BookDetails() {
 
   return (
     <main className={styles.container}>
+      <button
+        className={styles.backButton}
+        onClick={() => navigate(-1)}
+      >
+        ← Tilbake
+      </button>
+
       <div className={styles.card}>
         {cover && (
           <img
@@ -148,7 +157,9 @@ function BookDetails() {
           <p>
             <strong>Forfatter:</strong>{" "}
             {book.authors.length > 0
-              ? book.authors.map((author) => author.name).join(", ")
+              ? book.authors
+                  .map((author) => author.name)
+                  .join(", ")
               : "Ukjent forfatter"}
           </p>
 

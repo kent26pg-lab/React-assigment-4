@@ -7,6 +7,51 @@
 }
 
 /* ========================================
+   BACK BUTTON
+======================================== */
+
+.backButton {
+  margin-bottom: 18px;
+
+  padding: 9px 16px;
+
+  color: #4f3926;
+
+  background: rgba(255, 255, 255, 0.32);
+
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  border-radius: 999px;
+
+  font: inherit;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.backButton:hover {
+  background: rgba(255, 255, 255, 0.6);
+
+  transform: translateX(-3px);
+
+  box-shadow:
+    0 6px 15px rgba(80, 60, 40, 0.1);
+}
+
+/* ========================================
    BOOK DETAILS CARD
 ======================================== */
 
@@ -259,6 +304,10 @@
     margin: 20px auto;
 
     padding: 15px;
+  }
+
+  .backButton {
+    margin-bottom: 15px;
   }
 
   .card {
