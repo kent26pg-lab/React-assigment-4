@@ -1,36 +1,114 @@
-/* ========================================
-   GLOBAL RESET
-======================================== */
-
 * {
   box-sizing: border-box;
+
   margin: 0;
+
   padding: 0;
 }
 
 html {
   min-width: 320px;
+
+  scroll-behavior: smooth;
 }
 
 body {
   min-width: 320px;
+
   min-height: 100vh;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Segoe UI",
+    sans-serif;
 
   color: #302217;
-  background: #dfaaaa;
+
+  background:
+    radial-gradient(
+      circle at 50% -20%,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(248, 241, 229, 0.9) 35%,
+      rgba(235, 220, 198, 0.9) 70%,
+      rgba(220, 201, 174, 0.95) 100%
+    );
+
+  background-attachment: fixed;
+
+  -webkit-font-smoothing: antialiased;
 }
 
-button,
-input {
-  font-family: inherit;
+/* ========================================
+   ROOT
+======================================== */
+
+#root {
+  min-height: 100vh;
 }
 
-button {
-  cursor: pointer;
+/* ========================================
+   MAIN
+======================================== */
+
+main {
+  width: 100%;
 }
+
+/* ========================================
+   LINKS
+======================================== */
 
 a {
   color: inherit;
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+button,
+input {
+  font: inherit;
+}
+
+/* ========================================
+   SELECTION
+======================================== */
+
+::selection {
+  color: white;
+
+  background: rgba(107, 79, 53, 0.75);
+}
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(107, 79, 53, 0.35);
+
+  border-radius: 999px;
+
+  border: 2px solid transparent;
+
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 79, 53, 0.55);
+
+  border: 2px solid transparent;
+
+  background-clip: padding-box;
 }
