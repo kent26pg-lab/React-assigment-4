@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import BookCard from "../Components/BookCard.jsx";
 import styles from "./Books.module.css";
@@ -52,9 +49,7 @@ function Books() {
         const response = await fetch(url);
 
         if (!response.ok) {
-          throw new Error(
-            `HTTP error! status: ${response.status}`
-          );
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
@@ -65,7 +60,7 @@ function Books() {
       } catch (error) {
         console.error("Fetch error:", error);
 
-        setError("Kunne ikke hente bøkene.");
+        setError("couldnt fetch the books.");
         setBooks([]);
         setNextPage(null);
         setPreviousPage(null);
@@ -102,9 +97,7 @@ function Books() {
       return;
     }
 
-    navigate(
-      `/books?search=${encodeURIComponent(trimmedSearch)}`
-    );
+    navigate(`/books?search=${encodeURIComponent(trimmedSearch)}`);
   }
 
   function handleNextPage() {
@@ -117,8 +110,8 @@ function Books() {
     if (searchParam) {
       navigate(
         `/books?search=${encodeURIComponent(
-          searchParam
-        )}&page=${nextPageNumber}`
+          searchParam,
+        )}&page=${nextPageNumber}`,
       );
     } else {
       navigate(`/books?page=${nextPageNumber}`);
@@ -126,16 +119,11 @@ function Books() {
   }
 
   function handlePreviousPage() {
-    const previousPageNumber =
-      getPageNumber(previousPage);
+    const previousPageNumber = getPageNumber(previousPage);
 
     if (!previousPageNumber) {
       if (searchParam) {
-        navigate(
-          `/books?search=${encodeURIComponent(
-            searchParam
-          )}`
-        );
+        navigate(`/books?search=${encodeURIComponent(searchParam)}`);
       } else {
         navigate("/books");
       }
@@ -146,8 +134,8 @@ function Books() {
     if (searchParam) {
       navigate(
         `/books?search=${encodeURIComponent(
-          searchParam
-        )}&page=${previousPageNumber}`
+          searchParam,
+        )}&page=${previousPageNumber}`,
       );
     } else {
       navigate(`/books?page=${previousPageNumber}`);
@@ -156,56 +144,33 @@ function Books() {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>Books</h1>
-
-      <form
-        className={styles.searchForm}
-        onSubmit={handleSearch}
-      >
+      <form className={styles.searchForm} onSubmit={handleSearch}>
         <input
           className={styles.searchInput}
           type="text"
           value={search}
-          onChange={(event) =>
-            setSearch(event.target.value)
-          }
+          onChange={(event) => setSearch(event.target.value)}
           placeholder="Søk etter bok..."
         />
 
-        <button
-          className={styles.searchButton}
-          type="submit"
-        >
+        <button className={styles.searchButton} type="submit">
           Søk
         </button>
       </form>
 
-      {loading && (
-        <p className={styles.loading}>
-          Laster bøker...
-        </p>
-      )}
+      {loading && <p className={styles.loading}>Loading books...</p>}
 
-      {error && (
-        <p className={styles.error}>
-          {error}
-        </p>
-      )}
+      {error && <p className={styles.error}>{error}</p>}
 
       {!loading && !error && books.length === 0 && (
-        <p className={styles.empty}>
-          Ingen bøker funnet.
-        </p>
+        <p className={styles.empty}>No books found.</p>
       )}
 
       {!loading && !error && books.length > 0 && (
         <>
           <div className={styles.books}>
             {books.map((book) => (
-              <BookCard
-                key={book.id}
-                book={book}
-              />
+              <BookCard key={book.id} book={book} />
             ))}
           </div>
 
@@ -215,19 +180,17 @@ function Books() {
               onClick={handlePreviousPage}
               disabled={!previousPage}
             >
-              ← Forrige
+              ← Previous
             </button>
 
-            <span>
-              Side {pageParam}
-            </span>
+            <span>Side {pageParam}</span>
 
             <button
               className={styles.pageButton}
               onClick={handleNextPage}
               disabled={!nextPage}
             >
-              Neste →
+              Next →
             </button>
           </div>
         </>
