@@ -12,39 +12,44 @@ import App from "./App.jsx";
 
 import "./index.css";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "books",
+          element: <Books />,
+        },
+        {
+          path: "favorites",
+          element: <Favorites />,
+        },
+        {
+          path: "books/:id",
+          element: <BookDetails />,
+        },
+        {
+          path: "categories/:category",
+          element: <CategoryBooks />,
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "books",
-        element: <Books />,
-      },
-      {
-        path: "favorites",
-        element: <Favorites />,
-      },
-      {
-        path: "books/:id",
-        element: <BookDetails />,
-      },
-      {
-        path: "categories/:category",
-        element: <CategoryBooks />,
-      },
-    ],
-  },
-]);
+    basename: "/React-assigment-4",
+  }
+);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <FavoriteProvider>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </FavoriteProvider>
-  </StrictMode>,
+  </StrictMode>
 );
