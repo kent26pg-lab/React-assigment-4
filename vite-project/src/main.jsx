@@ -1,6 +1,11 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+
 import { FavoriteProvider } from "./Context/FavoriteContext.jsx";
 
 import Books from "./Pages/Books.jsx";
@@ -11,6 +16,25 @@ import CategoryBooks from "./Pages/CategoryBooks.jsx";
 import App from "./App.jsx";
 
 import "./index.css";
+
+const basename = "/React-assigment-4";
+
+// GitHub Pages 404 redirect
+const redirect = sessionStorage.redirect;
+
+if (redirect) {
+  delete sessionStorage.redirect;
+
+  const redirectUrl = new URL(redirect);
+
+  window.history.replaceState(
+    null,
+    "",
+    redirectUrl.pathname +
+      redirectUrl.search +
+      redirectUrl.hash
+  );
+}
 
 const router = createBrowserRouter(
   [
@@ -42,7 +66,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/React-assigment-4",
+    basename,
   }
 );
 

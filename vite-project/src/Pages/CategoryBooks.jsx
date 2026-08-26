@@ -3,6 +3,7 @@ import {
   Link,
   useNavigate,
   useParams,
+  useSearchParams,
 } from "react-router-dom";
 
 import styles from "./CategoryBooks.module.css";
@@ -11,6 +12,9 @@ function CategoryBooks() {
   const { category } = useParams();
 
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const page = Number(searchParams.get("page")) || 1;
 
   const [books, setBooks] = useState([]);
   const [nextPage, setNextPage] = useState(null);
@@ -19,17 +23,22 @@ function CategoryBooks() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const [pageUrl, setPageUrl] = useState(
-    `https://gutendex.com/books?topic=${category}`
-  );
-
   useEffect(() => {
     async function fetchBooks() {
       try {
         setLoading(true);
         setError("");
 
-        const response = await fetch(pageUrl);
+        const url =
+          page === 1
+            ? `https://gutendex.com/books?topic=${encodeURIComponent(
+                category
+              )}`
+            : `https://gutendex.com/books?topic=${encodeURIComponent(
+                category
+              )}&page=${page}`;
+
+        const response = await fetch(url);
 
         if (!response.ok) {
           throw new Error("Kunne ikke hente bøker.");
@@ -42,31 +51,62 @@ function CategoryBooks() {
         setPreviousPage(data.previous);
       } catch (error) {
         console.error(error);
-        setError("Noe gikk galt. Klarte ikke å hente bøkene.");
+        setError(
+          "Noe gikk galt. Klarte ikke å hente bøkene."
+        );
       } finally {
         setLoading(false);
       }
     }
 
     fetchBooks();
-  }, [pageUrl]);
+  }, [category, page]);
 
-  useEffect(() => {
-    setPageUrl(
-      `https://gutendex.com/books?topic=${category}`
-    );
-  }, [category]);
+  function getPageNumber(url) {
+    if (!url) {
+      return null;
+    }
+
+    const urlObject = new URL(url);
+
+    return Number(urlObject.searchParams.get("page"));
+  }
 
   function handleNextPage() {
-    if (nextPage) {
-      setPageUrl(nextPage);
+    const nextPageNumber = getPageNumber(nextPage);
+
+    if (!nextPageNumber) {
+      return;
     }
+
+    navigate(
+      `/categories/${encodeURIComponent(
+        category
+      )}?page=${nextPageNumber}`
+    );
   }
 
   function handlePreviousPage() {
-    if (previousPage) {
-      setPageUrl(previousPage);
+    const previousPageNumber =
+      getPageNumber(previousPage);
+
+    if (!previousPageNumber || previousPageNumber === 1) {
+      navigate(
+        `/categories/${encodeURIComponent(category)}`
+      );
+
+      return;
     }
+
+    navigate(
+      `/categories/${encodeURIComponent(
+        category
+      )}?page=${previousPageNumber}`
+    );
+  }
+
+  function handleBack() {
+    navigate("/books");
   }
 
   if (loading) {
@@ -88,13 +128,14 @@ function CategoryBooks() {
   return (
     <main className={styles.container}>
       <button
+        onClick={handleBack}
         className={styles.backButton}
-        onClick={() => navigate(-1)}
       >
-        ← Tilbake
+        ← Tilbake til bøker
       </button>
 
-  
+      <h1 className={styles.title}>{category}</h1>
+
       {books.length === 0 ? (
         <p className={styles.empty}>
           Ingen bøker funnet i denne kategorien.
@@ -141,6 +182,10 @@ function CategoryBooks() {
             >
               ← Previous
             </button>
+
+            <span className={styles.pageNumber}>
+              Side {page}
+            </span>
 
             <button
               className={styles.paginationButton}

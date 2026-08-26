@@ -1,29 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
   <head>
     <meta charset="UTF-8" />
 
     <script>
-      const path = window.location.pathname;
-      const search = window.location.search;
-      const hash = window.location.hash;
+      sessionStorage.redirect = location.href;
 
-      const base = "/React-assigment-4/";
-
-      const route = path.startsWith(base)
-        ? path.substring(base.length)
-        : path;
-
-      const redirectUrl =
-        base +
-        "?redirect=" +
-        encodeURIComponent(
-          "/" + route + search + hash
-        );
-
-      window.location.replace(redirectUrl);
+      location.replace(
+        "/React-assigment-4/"
+      );
     </script>
   </head>
 
-  <body></body>
+  <body>
+    Laster...
+  </body>
 </html>
