@@ -41,7 +41,7 @@ function CategoryBooks() {
         const response = await fetch(url);
 
         if (!response.ok) {
-          throw new Error("Kunne ikke hente bøker.");
+          throw new Error("Couldnt fetch books.");
         }
 
         const data = await response.json();
@@ -52,7 +52,7 @@ function CategoryBooks() {
       } catch (error) {
         console.error(error);
         setError(
-          "Noe gikk galt. Klarte ikke å hente bøkene."
+          "Something went wrong. Could fetch books."
         );
       } finally {
         setLoading(false);
@@ -112,7 +112,7 @@ function CategoryBooks() {
   if (loading) {
     return (
       <main className={styles.container}>
-        <p className={styles.loading}>Laster bøker...</p>
+        <p className={styles.loading}>Loading books...</p>
       </main>
     );
   }
@@ -131,14 +131,14 @@ function CategoryBooks() {
         onClick={handleBack}
         className={styles.backButton}
       >
-        ← Tilbake til bøker
+        ← Back to books
       </button>
 
       <h1 className={styles.title}>{category}</h1>
 
       {books.length === 0 ? (
         <p className={styles.empty}>
-          Ingen bøker funnet i denne kategorien.
+          No books found in this category.
         </p>
       ) : (
         <>
@@ -168,7 +168,7 @@ function CategoryBooks() {
                 <p className={styles.author}>
                   {book.authors.length > 0
                     ? book.authors[0].name
-                    : "Ukjent forfatter"}
+                    : "Unknown Author"}
                 </p>
               </Link>
             ))}
