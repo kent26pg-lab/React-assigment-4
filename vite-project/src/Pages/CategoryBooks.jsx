@@ -116,12 +116,17 @@ function CategoryBooks() {
 
   return (
     <main className={styles.container}>
-      <button onClick={handleBack} className={styles.backButton}>
+      <button
+        onClick={handleBack}
+        className={styles.backButton}
+      >
         ← Back to books
       </button>
 
       {books.length === 0 ? (
-        <p className={styles.empty}>No books found in this category.</p>
+        <p className={styles.empty}>
+          No books found in this category.
+        </p>
       ) : (
         <>
           <div className={styles.books}>
@@ -138,33 +143,33 @@ function CategoryBooks() {
                     className={styles.cover}
                   />
                 ) : (
-                  <div className={styles.noCover}>No cover</div>
+                  <div className={styles.noCover}>
+                    No cover
+                  </div>
                 )}
 
-                <h2 className={styles.bookTitle}>{book.title}</h2>
-
-                <p className={styles.author}>
-                  {book.authors.length > 0
-                    ? book.authors[0].name
-                    : "Unknown Author"}
-                </p>
+                <h2 className={styles.bookTitle}>
+                  {book.title}
+                </h2>
               </Link>
             ))}
           </div>
 
           <div className={styles.pagination}>
             <button
-              className={styles.paginationButton}
+              className={styles.pageButton}
               onClick={handlePreviousPage}
               disabled={!previousPage}
             >
               ← Previous
             </button>
 
-            <span className={styles.pageNumber}>Page {page}</span>
+            <span className={styles.pageNumber}>
+              Page {page}
+            </span>
 
             <button
-              className={styles.paginationButton}
+              className={styles.pageButton}
               onClick={handleNextPage}
               disabled={!nextPage}
             >
