@@ -150,11 +150,11 @@ function Books() {
           type="text"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
-          placeholder="Søk etter bok..."
+          placeholder="Search for book..."
         />
 
         <button className={styles.searchButton} type="submit">
-          Søk
+          Search
         </button>
       </form>
 
@@ -183,7 +183,7 @@ function Books() {
               ← Previous
             </button>
 
-            <span>Side {pageParam}</span>
+            <span>Page {pageParam}</span>
 
             <button
               className={styles.pageButton}
