@@ -31,11 +31,9 @@ function CategoryBooks() {
 
         const url =
           page === 1
-            ? `https://gutendex.com/books?topic=${encodeURIComponent(
-                category
-              )}`
+            ? `https://gutendex.com/books?topic=${encodeURIComponent(category)}`
             : `https://gutendex.com/books?topic=${encodeURIComponent(
-                category
+                category,
               )}&page=${page}`;
 
         const response = await fetch(url);
@@ -51,9 +49,7 @@ function CategoryBooks() {
         setPreviousPage(data.previous);
       } catch (error) {
         console.error(error);
-        setError(
-          "Something went wrong. Could fetch books."
-        );
+        setError("Something went wrong. Could fetch books.");
       } finally {
         setLoading(false);
       }
@@ -80,28 +76,21 @@ function CategoryBooks() {
     }
 
     navigate(
-      `/categories/${encodeURIComponent(
-        category
-      )}?page=${nextPageNumber}`
+      `/categories/${encodeURIComponent(category)}?page=${nextPageNumber}`,
     );
   }
 
   function handlePreviousPage() {
-    const previousPageNumber =
-      getPageNumber(previousPage);
+    const previousPageNumber = getPageNumber(previousPage);
 
     if (!previousPageNumber || previousPageNumber === 1) {
-      navigate(
-        `/categories/${encodeURIComponent(category)}`
-      );
+      navigate(`/categories/${encodeURIComponent(category)}`);
 
       return;
     }
 
     navigate(
-      `/categories/${encodeURIComponent(
-        category
-      )}?page=${previousPageNumber}`
+      `/categories/${encodeURIComponent(category)}?page=${previousPageNumber}`,
     );
   }
 
@@ -127,19 +116,12 @@ function CategoryBooks() {
 
   return (
     <main className={styles.container}>
-      <button
-        onClick={handleBack}
-        className={styles.backButton}
-      >
+      <button onClick={handleBack} className={styles.backButton}>
         ← Back to books
       </button>
 
-      <h1 className={styles.title}>{category}</h1>
-
       {books.length === 0 ? (
-        <p className={styles.empty}>
-          No books found in this category.
-        </p>
+        <p className={styles.empty}>No books found in this category.</p>
       ) : (
         <>
           <div className={styles.books}>
@@ -156,14 +138,10 @@ function CategoryBooks() {
                     className={styles.cover}
                   />
                 ) : (
-                  <div className={styles.noCover}>
-                    No cover
-                  </div>
+                  <div className={styles.noCover}>No cover</div>
                 )}
 
-                <h2 className={styles.bookTitle}>
-                  {book.title}
-                </h2>
+                <h2 className={styles.bookTitle}>{book.title}</h2>
 
                 <p className={styles.author}>
                   {book.authors.length > 0
@@ -183,9 +161,7 @@ function CategoryBooks() {
               ← Previous
             </button>
 
-            <span className={styles.pageNumber}>
-              Side {page}
-            </span>
+            <span className={styles.pageNumber}>Page {page}</span>
 
             <button
               className={styles.paginationButton}

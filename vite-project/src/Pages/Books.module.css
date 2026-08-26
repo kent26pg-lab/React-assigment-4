@@ -5,23 +5,13 @@
 }
 
 /* ========================================
-   TITLE
-======================================== */
-
-.title {
-  margin-bottom: 25px;
-  color: #302217;
-  font-size: 2rem;
-  letter-spacing: -0.3px;
-}
-
-/* ========================================
    SEARCH
 ======================================== */
 
 .searchForm {
   display: flex;
   gap: 10px;
+
   margin-bottom: 35px;
   padding: 10px;
 
@@ -50,6 +40,7 @@
   border-radius: 999px;
 
   outline: none;
+
   font: inherit;
 
   box-shadow:
@@ -166,7 +157,7 @@
   margin-top: 35px;
 }
 
-.pageNumber {
+.pagination span {
   min-width: 70px;
 
   color: #4f3926;
@@ -200,12 +191,14 @@
 
   transition:
     background 0.2s ease,
+    color 0.2s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
 
 .pageButton:hover:not(:disabled) {
   color: white;
+
   background: rgba(79, 57, 38, 0.85);
 
   transform: translateY(-2px);
@@ -219,6 +212,7 @@
   opacity: 0.4;
 
   cursor: not-allowed;
+
   transform: none;
 }
 
@@ -232,12 +226,9 @@
     padding: 15px;
   }
 
-  .title {
-    font-size: 1.7rem;
-  }
-
   .searchForm {
     flex-direction: column;
+
     padding: 12px;
 
     border-radius: 20px;
@@ -264,13 +255,15 @@
     gap: 8px;
   }
 
-  .pageNumber {
+  .pagination span {
     min-width: 55px;
+
     font-size: 0.85rem;
   }
 
   .pageButton {
     padding: 9px 14px;
+
     font-size: 0.9rem;
   }
 }
