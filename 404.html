@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="no">
   <head>
     <meta charset="UTF-8" />
 
     <script>
-      const base = "/React-assigment-4";
+      sessionStorage.redirect = location.href;
 
-      const path =
-        window.location.pathname.replace(base, "");
-
-      const redirect =
-        base +
-        "/?redirect=" +
-        encodeURIComponent(path + window.location.search);
-
-      window.location.replace(redirect);
+      location.replace(
+        "/React-assigment-4/"
+      );
     </script>
   </head>
 
-  <body></body>
+  <body>
+    Laster...
+  </body>
 </html>
