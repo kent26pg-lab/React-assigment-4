@@ -171,12 +171,12 @@ function BookDetails() {
           </div>
 
           <p>
-            <strong>Språk:</strong>{" "}
+            <strong>Language:</strong>{" "}
             {book.languages.length > 0
               ? book.languages
                   .map((language) => getLanguageName(language))
                   .join(", ")
-              : "Ukjent"}
+              : "Unkown"}
           </p>
 
           <div className={styles.actions}>
