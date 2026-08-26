@@ -1,20 +1,16 @@
 .navbar {
   width: 100%;
-  padding: 8px 15px 12px;
+  padding: 12px 20px 14px;
 
-  display: flex;
-  align-items: center;
+  background: rgba(255, 250, 243, 0.82);
 
-  background: rgba(248, 241, 229, 0.55);
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(80, 60, 40, 0.1);
 
   box-shadow:
-    0 8px 30px rgba(80, 60, 40, 0.08),
-    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+    0 4px 20px rgba(60, 45, 30, 0.06);
 
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
   position: relative;
   z-index: 10;
@@ -31,7 +27,7 @@
   flex-direction: column;
   align-items: center;
 
-  gap: 8px;
+  gap: 12px;
 }
 
 /* ========================================
@@ -45,7 +41,7 @@
   justify-content: center;
   align-items: center;
 
-  gap: 10px;
+  gap: 8px;
 }
 
 /* ========================================
@@ -57,13 +53,13 @@
   align-items: center;
   justify-content: center;
 
-  padding: 9px 15px;
+  padding: 9px 16px;
 
-  color: #4f3926;
-  background: rgba(255, 255, 255, 0.28);
+  color: #5a4633;
+  background: transparent;
 
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 999px;
+  border: 1px solid transparent;
+  border-radius: 10px;
 
   font-size: 0.9rem;
   font-weight: 600;
@@ -71,29 +67,18 @@
   text-decoration: none;
   white-space: nowrap;
 
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.65);
-
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
   transition:
     background 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .link:hover {
-  color: #302217;
+  color: #2e2117;
 
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(120, 90, 55, 0.08);
 
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 6px 18px rgba(80, 60, 40, 0.1),
-    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
 }
 
 /* ========================================
@@ -101,15 +86,12 @@
 ======================================== */
 
 .link.active {
-  color: white;
+  color: #ffffff;
 
-  background: rgba(79, 57, 38, 0.85);
-
-  border-color: rgba(255, 255, 255, 0.25);
+  background: #4a3524;
 
   box-shadow:
-    0 6px 18px rgba(79, 57, 38, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    0 4px 12px rgba(70, 50, 30, 0.18);
 }
 
 /* ========================================
@@ -117,96 +99,82 @@
 ======================================== */
 
 .searchForm {
-  width: min(500px, 45%);
+  width: min(520px, 45%);
 
   display: flex;
   align-items: center;
 
-  gap: 8px;
+  gap: 7px;
 
-  padding: 6px;
+  padding: 5px;
 
-  background: #685642; 
+  background: #ffffff;
 
-  border: 1px solid rgba(5, 4, 4, 0.137);
-  border-radius: 18px;
+  border: 1px solid #ded5c9;
+  border-radius: 14px;
 
   box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.7),
-    0 8px 25px rgba(80, 60, 40, 0.08);
+    0 3px 12px rgba(60, 45, 30, 0.08);
 
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
+.searchForm:focus-within {
+  border-color: #a47b45;
+
+  box-shadow:
+    0 0 0 3px rgba(164, 123, 69, 0.1),
+    0 4px 14px rgba(60, 45, 30, 0.08);
+}
+
+/* ========================================
+   SEARCH INPUT
+======================================== */
 
 .searchInput {
   flex: 1;
   min-width: 0;
 
-  padding: 9px 14px;
+  padding: 9px 13px;
 
-  color: #000000;
+  color: #2e2117;
+  background: transparent;
 
-  background: #fcf8f5;
-
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 999px;
-
+  border: none;
   outline: none;
 
   font: inherit;
   font-size: 0.9rem;
-
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.7);
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
 }
 
 .searchInput::placeholder {
-  background-color: #fcf8f5;
-  color: #000000;
-  width: 100%;
-  height: 100%;
+  color: #9b8c7b;
 }
 
-.searchInput:focus {
-  background: #fcf8f5;
-  color: #000000;
-
-  border-color: rgba(107, 79, 53, 0.35);
-
-  box-shadow:
-    0 0 0 3px rgba(107, 79, 53, 0.08),
-    inset 0 1px 1px rgba(255, 255, 255, 0.8);
-}
+/* ========================================
+   SEARCH BUTTON
+======================================== */
 
 .searchButton {
-  padding: 9px 15px;
+  padding: 9px 16px;
 
-  color: rgb(6, 6, 6);
+  color: #ffffff;
+  background: #4a3524;
 
-  background: #fcf8f5;
-
-  border: 1px solid rgb(0, 0, 0);
-  border-radius: 999px;
+  border: none;
+  border-radius: 10px;
 
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
 
   cursor: pointer;
   white-space: nowrap;
 
   box-shadow:
-    0 6px 18px rgba(79, 57, 38, 0.18),
-    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    0 3px 8px rgba(60, 40, 25, 0.18);
 
   transition:
     background 0.2s ease,
@@ -215,18 +183,16 @@
 }
 
 .searchButton:hover {
-  background: #f4eadc;
-  color: #000000;
+  background: #2f2117;
 
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 
   box-shadow:
-    0 9px 22px rgba(79, 57, 38, 0.22),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    0 5px 12px rgba(60, 40, 25, 0.22);
 }
 
 /* ========================================
-   CATEGORIES - EGEN REKKE
+   CATEGORIES
 ======================================== */
 
 .categorySection {
@@ -236,25 +202,28 @@
   flex-direction: column;
   align-items: center;
 
-  padding-top: 5px;
+  padding-top: 10px;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-top: 1px solid rgba(80, 60, 40, 0.08);
 }
 
 .categoryTitle {
-  margin: 0 0 10px;
+  margin: 0 0 9px;
 
-  color: #4f3926;
+  color: #7c6a56;
 
   font-family: Georgia, "Times New Roman", serif;
 
-  font-size: 0.95rem;
+  font-size: 0.82rem;
   font-weight: 600;
 
-  letter-spacing: 0.3px;
-
-  text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
+
+/* ========================================
+   CATEGORY LIST
+======================================== */
 
 .categories {
   width: 100%;
@@ -268,49 +237,44 @@
   gap: 6px;
 }
 
+/* ========================================
+   CATEGORY
+======================================== */
+
 .category {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  padding: 6px 10px;
+  padding: 6px 11px;
 
-  color: #6b4f35;
+  color: #6c5945;
+  background: #f4eee6;
 
-  background: rgba(255, 255, 255, 0.3);
-
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid #e5dbce;
   border-radius: 999px;
 
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 500;
 
   text-decoration: none;
   white-space: nowrap;
 
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.6);
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
   transition:
     background 0.2s ease,
     color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .category:hover {
-  color: white;
+  color: #4a3524;
 
-  background: rgba(107, 79, 53, 0.85);
+  background: #e9ddcc;
 
-  transform: translateY(-2px);
+  border-color: #d4c1a7;
 
-  box-shadow:
-    0 5px 15px rgba(80, 60, 40, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
 }
 
 /* ========================================
@@ -318,15 +282,14 @@
 ======================================== */
 
 .categoryActive {
-  color: white;
+  color: #ffffff;
 
-  background: rgba(107, 79, 53, 0.72);
+  background: #a47b45;
 
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: #a47b45;
 
   box-shadow:
-    0 5px 15px rgba(80, 60, 40, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    0 3px 9px rgba(120, 85, 40, 0.18);
 }
 
 /* ========================================
@@ -335,24 +298,29 @@
 
 @media (max-width: 700px) {
   .navbar {
-    padding: 8px 10px 12px;
+    padding: 10px 12px 12px;
   }
 
   .links {
-    gap: 6px;
+    gap: 4px;
   }
 
   .link {
-    padding: 8px 11px;
-    font-size: 0.85rem;
+    padding: 8px 10px;
+    font-size: 0.82rem;
   }
 
   .searchForm {
-    width: 90%;
+    width: 100%;
+    max-width: 500px;
   }
 
   .categorySection {
     padding-top: 8px;
+  }
+
+  .categoryTitle {
+    font-size: 0.76rem;
   }
 
   .categories {
@@ -360,7 +328,7 @@
   }
 
   .category {
-    padding: 6px 9px;
-    font-size: 0.75rem;
+    padding: 5px 9px;
+    font-size: 0.72rem;
   }
 }
