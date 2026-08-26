@@ -1,17 +1,9 @@
-import {
-  Link,
-  NavLink,
-  useLocation,
-} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import styles from "./NavBar.module.css";
 
 function Navbar() {
   const location = useLocation();
-
-  const showCategories =
-    location.pathname === "/books" ||
-    location.pathname.startsWith("/categories/");
 
   const categories = [
     "Fiction",
@@ -28,6 +20,22 @@ function Navbar() {
     "War",
     "Philosophy",
   ];
+
+  const isBooksActive =
+    location.pathname === "/books" ||
+    location.pathname.startsWith("/books/") ||
+    location.pathname.startsWith("/categories/");
+
+  const isCategoryPage =
+    location.pathname.startsWith("/categories/");
+
+  const currentCategory = isCategoryPage
+    ? decodeURIComponent(location.pathname.split("/")[2])
+    : null;
+
+  const showCategories =
+    location.pathname === "/books" ||
+    location.pathname.startsWith("/categories/");
 
   return (
     <header className={styles.navbar}>
@@ -47,9 +55,7 @@ function Navbar() {
           <Link
             to="/books"
             className={`${styles.link} ${
-              location.pathname === "/books"
-                ? styles.active
-                : ""
+              isBooksActive ? styles.active : ""
             }`}
           >
             Books
@@ -74,21 +80,24 @@ function Navbar() {
             </h2>
 
             <div className={styles.categories}>
-              {categories.map((category) => (
-                <NavLink
-                  key={category}
-                  to={`/categories/${category}`}
-                  className={({ isActive }) =>
-                    `${styles.category} ${
+              {categories.map((category) => {
+                const isActive =
+                  currentCategory === category;
+
+                return (
+                  <Link
+                    key={category}
+                    to={`/categories/${category}`}
+                    className={`${styles.category} ${
                       isActive
-                        ? styles.activeCategory
+                        ? styles.categoryActive
                         : ""
-                    }`
-                  }
-                >
-                  {category}
-                </NavLink>
-              ))}
+                    }`}
+                  >
+                    {category}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}
