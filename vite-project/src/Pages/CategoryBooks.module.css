@@ -6,6 +6,39 @@
   padding: 30px;
 }
 
+.backButton {
+  margin-bottom: 20px;
+
+  padding: 10px 18px;
+
+  color: #4f3926;
+
+  background: #f8f1e5;
+
+  border: 1px solid #d6c7ad;
+
+  border-radius: 6px;
+
+  font: inherit;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.backButton:hover {
+  color: white;
+
+  background: #6b4f35;
+
+  transform: translateX(-2px);
+}
+
 /* ========================================
    TITLE
 ======================================== */

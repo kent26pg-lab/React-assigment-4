@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
 import styles from "./CategoryBooks.module.css";
 
 function CategoryBooks() {
   const { category } = useParams();
+
+  const navigate = useNavigate();
 
   const [books, setBooks] = useState([]);
   const [nextPage, setNextPage] = useState(null);
@@ -46,7 +52,9 @@ function CategoryBooks() {
   }, [pageUrl]);
 
   useEffect(() => {
-    setPageUrl(`https://gutendex.com/books?topic=${category}`);
+    setPageUrl(
+      `https://gutendex.com/books?topic=${category}`
+    );
   }, [category]);
 
   function handleNextPage() {
@@ -79,6 +87,13 @@ function CategoryBooks() {
 
   return (
     <main className={styles.container}>
+      <button
+        className={styles.backButton}
+        onClick={() => navigate(-1)}
+      >
+        ← Tilbake
+      </button>
+
       <h1 className={styles.title}>{category}</h1>
 
       {books.length === 0 ? (
