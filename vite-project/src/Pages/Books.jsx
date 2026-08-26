@@ -1,28 +1,21 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import BookCard from "../Components/BookCard.jsx";
 import styles from "./Books.module.css";
 
 function Books() {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const searchParam = searchParams.get("search") || "";
   const pageParam = searchParams.get("page") || "1";
 
   const [books, setBooks] = useState([]);
-  const [search, setSearch] = useState(searchParam);
-
   const [nextPage, setNextPage] = useState(null);
   const [previousPage, setPreviousPage] = useState(null);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    setSearch(searchParam);
-  }, [searchParam]);
 
   useEffect(() => {
     async function loadBooks() {
@@ -49,7 +42,9 @@ function Books() {
         const response = await fetch(url);
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(
+            `HTTP error! status: ${response.status}`,
+          );
         }
 
         const data = await response.json();
@@ -60,7 +55,7 @@ function Books() {
       } catch (error) {
         console.error("Fetch error:", error);
 
-        setError("couldnt fetch the books.");
+        setError("Couldn't fetch the books.");
         setBooks([]);
         setNextPage(null);
         setPreviousPage(null);
@@ -72,122 +67,99 @@ function Books() {
     loadBooks();
   }, [searchParam, pageParam]);
 
-  function getPageNumber(url) {
-    if (!url) {
-      return null;
-    }
-
-    try {
-      const urlObject = new URL(url);
-
-      return urlObject.searchParams.get("page");
-    } catch (error) {
-      console.error("Kunne ikke lese side fra URL:", error);
-      return null;
-    }
+  if (loading) {
+    return (
+      <main className={styles.container}>
+        <p className={styles.loading}>Loading books...</p>
+      </main>
+    );
   }
 
-  function handleSearch(event) {
-    event.preventDefault();
-
-    const trimmedSearch = search.trim();
-
-    if (!trimmedSearch) {
-      navigate("/books");
-      return;
-    }
-
-    navigate(`/books?search=${encodeURIComponent(trimmedSearch)}`);
-  }
-
-  function handleNextPage() {
-    const nextPageNumber = getPageNumber(nextPage);
-
-    if (!nextPageNumber) {
-      return;
-    }
-
-    if (searchParam) {
-      navigate(
-        `/books?search=${encodeURIComponent(
-          searchParam,
-        )}&page=${nextPageNumber}`,
-      );
-    } else {
-      navigate(`/books?page=${nextPageNumber}`);
-    }
-  }
-
-  function handlePreviousPage() {
-    const previousPageNumber = getPageNumber(previousPage);
-
-    if (!previousPageNumber) {
-      if (searchParam) {
-        navigate(`/books?search=${encodeURIComponent(searchParam)}`);
-      } else {
-        navigate("/books");
-      }
-
-      return;
-    }
-
-    if (searchParam) {
-      navigate(
-        `/books?search=${encodeURIComponent(
-          searchParam,
-        )}&page=${previousPageNumber}`,
-      );
-    } else {
-      navigate(`/books?page=${previousPageNumber}`);
-    }
+  if (error) {
+    return (
+      <main className={styles.container}>
+        <p className={styles.error}>{error}</p>
+      </main>
+    );
   }
 
   return (
     <main className={styles.container}>
-      <form className={styles.searchForm} onSubmit={handleSearch}>
-        <input
-          className={styles.searchInput}
-          type="text"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          placeholder="Search for book..."
-        />
-
-        <button className={styles.searchButton} type="submit">
-          Search
-        </button>
-      </form>
-
-      {loading && <p className={styles.loading}>Loading books...</p>}
-
-      {error && <p className={styles.error}>{error}</p>}
-
-      {!loading && !error && books.length === 0 && (
+      {books.length === 0 ? (
         <p className={styles.empty}>No books found.</p>
-      )}
-
-      {!loading && !error && books.length > 0 && (
+      ) : (
         <>
           <div className={styles.books}>
             {books.map((book) => (
-              <BookCard key={book.id} book={book} />
+              <BookCard
+                key={book.id}
+                book={book}
+              />
             ))}
           </div>
 
           <div className={styles.pagination}>
             <button
               className={styles.pageButton}
-              onClick={handlePreviousPage}
+              onClick={() => {
+                if (previousPage) {
+                  const url = new URL(previousPage);
+                  const page =
+                    url.searchParams.get("page");
+
+                  const search =
+                    url.searchParams.get("search");
+
+                  if (search) {
+                    window.history.pushState(
+                      {},
+                      "",
+                      `/books?search=${encodeURIComponent(
+                        search,
+                      )}&page=${page || 1}`,
+                    );
+
+                    window.dispatchEvent(
+                      new PopStateEvent("popstate"),
+                    );
+                  }
+                }
+              }}
               disabled={!previousPage}
             >
               ← Previous
             </button>
 
-            <span>Page {pageParam}</span>
+            <span className={styles.pageNumber}>
+              Page {pageParam}
+            </span>
 
             <button
               className={styles.pageButton}
-              onClick={handleNextPage}
+              onClick={() => {
+                if (nextPage) {
+                  const url = new URL(nextPage);
+                  const page =
+                    url.searchParams.get("page");
+
+                  const search =
+                    url.searchParams.get("search");
+
+                  if (search) {
+                    window.history.pushState(
+                      {},
+                      "",
+                      `/books?search=${encodeURIComponent(
+                        search,
+                      )}&page=${page || 1}`,
+                    );
+
+                    window.dispatchEvent(
+                      new PopStateEvent("popstate"),
+                    );
+                  }
+                }
+              }}
               disabled={!nextPage}
             >
               Next →
