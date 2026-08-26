@@ -94,8 +94,7 @@ function CategoryBooks() {
         ← Tilbake
       </button>
 
-      <h1 className={styles.title}>{category}</h1>
-
+  
       {books.length === 0 ? (
         <p className={styles.empty}>
           Ingen bøker funnet i denne kategorien.

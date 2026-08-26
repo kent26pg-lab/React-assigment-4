@@ -1,11 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  useLocation,
+} from "react-router-dom";
 
 import styles from "./NavBar.module.css";
 
 function Navbar() {
   const location = useLocation();
 
-  const showCategories = location.pathname === "/books";
+  const showCategories =
+    location.pathname === "/books" ||
+    location.pathname.startsWith("/categories/");
 
   const categories = [
     "Fiction",
@@ -30,7 +36,9 @@ function Navbar() {
           <Link
             to="/"
             className={`${styles.link} ${
-              location.pathname === "/" ? styles.active : ""
+              location.pathname === "/"
+                ? styles.active
+                : ""
             }`}
           >
             Home
@@ -39,7 +47,9 @@ function Navbar() {
           <Link
             to="/books"
             className={`${styles.link} ${
-              location.pathname === "/books" ? styles.active : ""
+              location.pathname === "/books"
+                ? styles.active
+                : ""
             }`}
           >
             Books
@@ -48,7 +58,9 @@ function Navbar() {
           <Link
             to="/favorites"
             className={`${styles.link} ${
-              location.pathname === "/favorites" ? styles.active : ""
+              location.pathname === "/favorites"
+                ? styles.active
+                : ""
             }`}
           >
             Favorites
@@ -57,17 +69,25 @@ function Navbar() {
 
         {showCategories && (
           <div className={styles.categorySection}>
-            <h2 className={styles.categoryTitle}>Categories</h2>
+            <h2 className={styles.categoryTitle}>
+              Categories
+            </h2>
 
             <div className={styles.categories}>
               {categories.map((category) => (
-                <Link
+                <NavLink
                   key={category}
                   to={`/categories/${category}`}
-                  className={styles.category}
+                  className={({ isActive }) =>
+                    `${styles.category} ${
+                      isActive
+                        ? styles.activeCategory
+                        : ""
+                    }`
+                  }
                 >
                   {category}
-                </Link>
+                </NavLink>
               ))}
             </div>
           </div>
