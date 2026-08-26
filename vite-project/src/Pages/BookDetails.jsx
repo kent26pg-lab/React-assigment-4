@@ -34,29 +34,29 @@ function BookDetails() {
 
   function getLanguageName(languageCode) {
     const languages = {
-      en: "Engelsk",
-      no: "Norsk",
-      nb: "Norsk bokmål",
-      nn: "Norsk nynorsk",
-      da: "Dansk",
-      sv: "Svensk",
-      de: "Tysk",
-      fr: "Fransk",
-      es: "Spansk",
-      it: "Italiensk",
-      pt: "Portugisisk",
-      nl: "Nederlandsk",
-      fi: "Finsk",
-      is: "Islandsk",
-      pl: "Polsk",
-      ru: "Russisk",
-      uk: "Ukrainsk",
-      el: "Gresk",
+      en: "English",
+      no: "Norwegian",
+      nb: "Norwegian Bokmål",
+      nn: "Norwegian Nynorsk",
+      da: "Danish",
+      sv: "Swedish",
+      de: "German",
+      fr: "French",
+      es: "Spanish",
+      it: "Italian",
+      pt: "Portuguese",
+      nl: "Dutch",
+      fi: "Finnish",
+      is: "Icelandic",
+      pl: "Polish",
+      ru: "Russian",
+      uk: "Ukrainian",
+      el: "Greek",
       la: "Latin",
-      ja: "Japansk",
-      zh: "Kinesisk",
-      ar: "Arabisk",
-      he: "Hebraisk",
+      ja: "Japanese",
+      zh: "Chinese",
+      ar: "Arabic",
+      he: "Hebrew",
     };
 
     return languages[languageCode] || languageCode;
@@ -68,12 +68,10 @@ function BookDetails() {
         setLoading(true);
         setError("");
 
-        const response = await fetch(
-          `https://gutendex.com/books/${id}`
-        );
+        const response = await fetch(`https://gutendex.com/books/${id}`);
 
         if (!response.ok) {
-          throw new Error("Kunne ikke hente boken.");
+          throw new Error("Couldnt fetch the book.");
         }
 
         const data = await response.json();
@@ -81,7 +79,7 @@ function BookDetails() {
         setBook(data);
       } catch (error) {
         console.error(error);
-        setError("Noe gikk galt. Klarte ikke å hente boken.");
+        setError("Something went wrong. Couldnt fetch the book.");
       } finally {
         setLoading(false);
       }
@@ -93,7 +91,7 @@ function BookDetails() {
   if (loading) {
     return (
       <main className={styles.container}>
-        <p className={styles.loading}>Laster bok...</p>
+        <p className={styles.loading}>Loading Book...</p>
       </main>
     );
   }
@@ -129,62 +127,45 @@ function BookDetails() {
 
   const bookCategories = categories.filter((category) =>
     book.subjects.some((subject) =>
-      subject.toLowerCase().includes(category.toLowerCase())
-    )
+      subject.toLowerCase().includes(category.toLowerCase()),
+    ),
   );
 
   return (
     <main className={styles.container}>
-      <button
-        className={styles.backButton}
-        onClick={() => navigate(-1)}
-      >
-        ← Tilbake
+      <button className={styles.backButton} onClick={() => navigate(-1)}>
+        ← Back
       </button>
 
       <div className={styles.card}>
-        {cover && (
-          <img
-            src={cover}
-            alt={book.title}
-            className={styles.cover}
-          />
-        )}
+        {cover && <img src={cover} alt={book.title} className={styles.cover} />}
 
         <div className={styles.info}>
           <h1 className={styles.title}>{book.title}</h1>
 
           <p>
-            <strong>Forfatter:</strong>{" "}
+            <strong>Author:</strong>{" "}
             {book.authors.length > 0
-              ? book.authors
-                  .map((author) => author.name)
-                  .join(", ")
-              : "Ukjent forfatter"}
+              ? book.authors.map((author) => author.name).join(", ")
+              : "Unkown Author"}
           </p>
 
           <p>
-            <strong>Nedlastninger:</strong>{" "}
-            {book.download_count}
+            <strong>Downloads:</strong> {book.download_count}
           </p>
 
           <div className={styles.categoryInfo}>
-            <strong>Kategori:</strong>
+            <strong>Category:</strong>
 
             <div className={styles.categories}>
               {bookCategories.length > 0 ? (
                 bookCategories.map((category) => (
-                  <span
-                    key={category}
-                    className={styles.category}
-                  >
+                  <span key={category} className={styles.category}>
                     {category}
                   </span>
                 ))
               ) : (
-                <span className={styles.noCategory}>
-                  Ingen kategori
-                </span>
+                <span className={styles.noCategory}>No categories</span>
               )}
             </div>
           </div>
@@ -193,9 +174,7 @@ function BookDetails() {
             <strong>Språk:</strong>{" "}
             {book.languages.length > 0
               ? book.languages
-                  .map((language) =>
-                    getLanguageName(language)
-                  )
+                  .map((language) => getLanguageName(language))
                   .join(", ")
               : "Ukjent"}
           </p>
@@ -208,17 +187,12 @@ function BookDetails() {
                 rel="noopener noreferrer"
                 className={styles.link}
               >
-                Les boka digitalt
+                Read the book digitally
               </a>
             )}
 
-            <button
-              className={styles.favoriteButton}
-              onClick={handleFavorite}
-            >
-              {favorite
-                ? "Fjern fra Favoritter"
-                : "Legg til i Favoritter"}
+            <button className={styles.favoriteButton} onClick={handleFavorite}>
+              {favorite ? "Remove from Favorites" : "Add to Favorites"}
             </button>
           </div>
         </div>
