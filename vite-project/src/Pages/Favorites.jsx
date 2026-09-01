@@ -28,7 +28,7 @@ function Favorites() {
                 className={styles.removeButton}
                 onClick={() => removeFavorite(book.id)}
               >
-                Fjern
+                Remove
               </button>
             </article>
           ))}
